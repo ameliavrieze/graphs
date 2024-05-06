@@ -343,6 +343,16 @@ public class Graph {
     return this.edgesFrom(vertexNumber(vertex));
   } // edgesFrom(String)
 
+  public void reachableFrom(PrintWriter pen, int vertex) {
+    for (Edge edge : this.edgesFrom(vertex)) {
+      if (!this.isMarked(edge.to())) {
+        pen.println(edge.to() + " ");
+        this.reachableFrom(pen, edge.to());
+      }
+    }
+    this.mark(vertex);
+  }
+
   /**
    * Get a path from start to finish. If no such path exists, returns null.
    */
